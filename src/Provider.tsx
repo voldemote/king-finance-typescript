@@ -15,6 +15,7 @@ const theme = {
 };
 
 export const Provider = ({ children }: ProviderProps) => {
+  const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer
@@ -27,7 +28,7 @@ export const Provider = ({ children }: ProviderProps) => {
       />
       <StoreProvider>
         <Web3Provider>
-          <SmoothProvider>{children}</SmoothProvider>
+          {isDesktop && <SmoothProvider>{children}</SmoothProvider>} {!isDesktop && <>{children}</>}
         </Web3Provider>
       </StoreProvider>
     </ThemeProvider>

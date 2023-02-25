@@ -15,7 +15,6 @@ import './config/i18n';
 import { Staking } from './pages/staking';
 import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
-
 import 'react-responsive-modal/styles.css';
 
 function App() {
