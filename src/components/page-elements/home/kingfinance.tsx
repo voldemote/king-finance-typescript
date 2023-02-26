@@ -57,7 +57,7 @@ const VideoSection = styled.div`
   height: 100%;
 `;
 const DesktopVideo = styled.video`
-  width: auto;
+  width: 100%;
   height: 100%;
   display: block;
 
@@ -67,7 +67,7 @@ const DesktopVideo = styled.video`
 `;
 
 const TabletVideo = styled.video`
-  width: auto;
+  width: 100%;
   height: 100%;
   display: none;
 
@@ -81,7 +81,7 @@ const TabletVideo = styled.video`
 `;
 
 const MobileVideo = styled.video`
-  width: auto;
+  width: 100%;
   display: none;
 
   @media screen and (max-width: 394px) {
