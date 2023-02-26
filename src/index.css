@@ -21,6 +21,11 @@
   src: url('assets/font/GothamBook.otf') format('openType');
 }
 
+html {
+   max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
   background-color: #000;
   margin: 0;
@@ -32,6 +37,8 @@ body {
   font-size: 12px;
   color: #ffffff;
   scroll-behavior: smooth;
+   max-width: 100%;
+    overflow-x: hidden;
 }
 
 button {
