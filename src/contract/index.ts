@@ -3,6 +3,7 @@
 import { ethers } from 'ethers';
 import contracts from './contracts.json';
 import { erc20ABI } from 'wagmi'
+import { isTest } from 'src/config/test';
 
 let signer: any = null;
 let provider: any = null;
@@ -57,7 +58,7 @@ export const withdraw = async (amount: number) => {
 
 export const getFreeData = async () => {
     const freeData = [];
-    const rpc = "https://bsc-dataseed1.binance.org";
+    const rpc = isTest ? "https://data-seed-prebsc-1-s1.binance.org:8545/" : "https://bsc-dataseed1.binance.org";
     const provider = new ethers.providers.JsonRpcProvider(rpc);
     const StakingContract = new ethers.Contract(contracts.King.staking, contracts.King.abi, provider);
 
@@ -115,7 +116,8 @@ const getAPY = (_totalLocked: string) => {
 }
 
 const getKingPrice = async () => {
-    const response = await fetch('https://api.dev.dex.guru/v1/chain/56/tokens/0x74f08aF7528Ffb751e3A435ddD779b5C4565e684/market?api-key=UnK0BOsJoU3FhwiWcoIuBzGQVT3j_dw_656de3zEAAs')
+    const chainId = isTest ? 97 : 56;
+    const response = await fetch(`https://api.dev.dex.guru/v1/chain/${chainId}/tokens/0x74f08aF7528Ffb751e3A435ddD779b5C4565e684/market?api-key=UnK0BOsJoU3FhwiWcoIuBzGQVT3j_dw_656de3zEAAs`)
     const data = await response.json()
     const res = data.price_usd.toFixed(5);
     return res

@@ -20,19 +20,20 @@ import {
   coinbaseWallet
 } from '@rainbow-me/rainbowkit/wallets';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { bsc } from 'wagmi/chains';
+import { bsc, bscTestnet } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
 import '@rainbow-me/rainbowkit/styles.css';
 
 import 'react-toastify/dist/ReactToastify.min.css';
+import { isTest } from './config/test';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 window.Buffer = require('buffer').Buffer;
 
 const { chains, provider } = configureChains(
-  [bsc],
+  [isTest ? bscTestnet : bsc],
   [alchemyProvider({ apiKey: '6mDnh0_FqrDQzdcOCI_O5NkDs70x4VYp' }), publicProvider()]
 );
 
