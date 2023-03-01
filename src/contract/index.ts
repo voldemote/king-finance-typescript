@@ -14,11 +14,14 @@ let StakingWithSigner: any = null;
 let currencyContract: any = null;
 let currencyContractWithSigner: any = null;
 
+const Addy = isTest ? contracts.King.testnet_address : contracts.King.address;
+const stakingAddy = isTest ? contracts.King.testnet_staking : contracts.King.staking
+
 export const initializeWeb3 = async (provider_: any, signer_: any) => {
-    currencyContract = new ethers.Contract(contracts.King.address, erc20ABI, provider_);
-    currencyContractWithSigner = new ethers.Contract(contracts.King.address, erc20ABI, signer_);
-    StakingWithSigner = new ethers.Contract(contracts.King.staking, contracts.King.abi, signer_);
-    Staking = new ethers.Contract(contracts.King.staking, contracts.King.abi, provider_);
+    currencyContract = new ethers.Contract(Addy, erc20ABI, provider_);
+    currencyContractWithSigner = new ethers.Contract(Addy, erc20ABI, signer_);
+    StakingWithSigner = new ethers.Contract(stakingAddy, contracts.King.abi, signer_);
+    Staking = new ethers.Contract(stakingAddy, contracts.King.abi, provider_);
 
     provider =  provider_;
     signer =  await signer_;
@@ -34,7 +37,7 @@ export const approve = async () => {
 
 export const isApproved = async (address: string | undefined) => {
     if(currencyContract !== null && currencyContract !== undefined && address !== undefined) {
-        const _allownace = await currencyContract.allowance(address, contracts.King.staking);
+        const _allownace = await currencyContract.allowance(address, stakingAddy);
         const allowance = _allownace.toString();
         const isAllow = allowance > '100000000000';
         return isAllow
@@ -60,7 +63,7 @@ export const getFreeData = async () => {
     const freeData = [];
     const rpc = isTest ? "https://data-seed-prebsc-1-s1.binance.org:8545/" : "https://bsc-dataseed1.binance.org";
     const provider = new ethers.providers.JsonRpcProvider(rpc);
-    const StakingContract = new ethers.Contract(contracts.King.staking, contracts.King.abi, provider);
+    const StakingContract = new ethers.Contract(stakingAddy, contracts.King.abi, provider);
 
     const _totalLocked = await StakingContract.totalUsersStake();
     const totalLocked = parseFloat(ethers.utils.formatUnits(_totalLocked.toString(), 9)).toFixed(4);

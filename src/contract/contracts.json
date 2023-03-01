@@ -1,7 +1,9 @@
 {
   "King": {
     "address": "0x74f08aF7528Ffb751e3A435ddD779b5C4565e684",
+    "testnet_address": "",
     "staking": "0x66e5388c84da5A30EbE58eEAC73bBCeB59c9F1Ae",
+    "testnet_staking": "",
     "abi": [
       {
         "inputs": [
