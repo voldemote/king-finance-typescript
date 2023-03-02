@@ -40,9 +40,9 @@ export const TokenGraphSection = () => {
         </MediumText>
         <SmallText>
           {/* {t('token.newlisting')} */}
-          <SmallTextLabel>10% Buy</SmallTextLabel>
+          <SmallTextLabel>5% Buy</SmallTextLabel>
           <SmallTextLabel> | </SmallTextLabel>
-          <SmallTextLabel>15% SELL</SmallTextLabel>
+          <SmallTextLabel>12% SELL</SmallTextLabel>
         </SmallText>
       </TokenDetails>
     </TokenGraphContainer>
