@@ -15,7 +15,7 @@ let currencyContract: any = null;
 let currencyContractWithSigner: any = null;
 
 const Addy = isTest ? contracts.King.testnet_address : contracts.King.address;
-const stakingAddy = isTest ? contracts.King.testnet_staking : contracts.King.staking
+const stakingAddy = contracts.King.staking;
 
 export const initializeWeb3 = async (provider_: any, signer_: any) => {
     currencyContract = new ethers.Contract(Addy, erc20ABI, provider_);
@@ -61,7 +61,7 @@ export const withdraw = async (amount: number) => {
 
 export const getFreeData = async () => {
     const freeData = [];
-    const rpc = isTest ? "https://data-seed-prebsc-1-s1.binance.org:8545/" : "https://bsc-dataseed1.binance.org";
+    const rpc = isTest ? "https://rpc-mumbai.maticvigil.com" : "https://bsc-dataseed1.binance.org";
     const provider = new ethers.providers.JsonRpcProvider(rpc);
     const StakingContract = new ethers.Contract(stakingAddy, contracts.King.abi, provider);
 

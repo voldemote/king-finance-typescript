@@ -20,7 +20,7 @@ import {
   coinbaseWallet
 } from '@rainbow-me/rainbowkit/wallets';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { bsc, bscTestnet } from 'wagmi/chains';
+import { bsc, polygonMumbai } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -33,7 +33,7 @@ import { isTest } from './config/test';
 window.Buffer = require('buffer').Buffer;
 
 const { chains, provider } = configureChains(
-  [isTest ? bscTestnet : bsc],
+  [isTest ? polygonMumbai : bsc],
   [alchemyProvider({ apiKey: '6mDnh0_FqrDQzdcOCI_O5NkDs70x4VYp' }), publicProvider()]
 );
 

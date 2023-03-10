@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { StatusText } from './staking-status';
-import { approve, compound, getUserData, tokenDeposit, withdraw } from 'src/contract';
+import { approve, compound, getFreeData, getUserData, tokenDeposit, withdraw } from 'src/contract';
 import { Spinner } from 'src/components/spinner';
 import { useAccount } from 'wagmi';
 import { useWeb3Store } from 'src/context/Web3Context';
-import { commaSeparators } from 'src/utils/commaSeparators';
+import { commaSeparators, parseToFloat } from 'src/utils/commaSeparators';
 import { StakingInfoIcon } from 'src/config/images';
 import { StakingInfoModal } from 'src/components/modal/staking';
 import { BlacklistAddresses } from 'src/components/constants/blacklist';
@@ -26,6 +26,7 @@ export const StakingPanel = () => {
   const [isApprove, setApprove] = useState(false);
   const [isFlag, setFlag] = useState(false);
   const [isStakingModalOpen, setStakingModalOpen] = useState(false);
+  const [kingPrice, setKingPrice] = useState(0);
 
   const { isConnected, address } = useAccount();
 
@@ -47,6 +48,11 @@ export const StakingPanel = () => {
         setSpecialUser(true);
       }
     }
+  };
+
+  const getKingPrice = async () => {
+    const freeData = await getFreeData();
+    setKingPrice(freeData[3]);
   };
 
   const getData = async () => {
@@ -77,6 +83,7 @@ export const StakingPanel = () => {
 
   useEffect(() => {
     getData();
+    getKingPrice();
   }, [isInitialized, isConnected, isLoad]);
 
   const handleTime = () => {
@@ -150,11 +157,11 @@ export const StakingPanel = () => {
           </StakingInfo>
           <KingBalanceCircle>
             <KingBalanceTitle>$King Balance</KingBalanceTitle>
-            <KingBalanceValue>{commaSeparators(kingBalance)}</KingBalanceValue>
+            <KingBalanceValue>{commaSeparators(parseToFloat(kingBalance, kingPrice))}</KingBalanceValue>
           </KingBalanceCircle>
           <KingBalanceText>
-            <StatusText title="Pending reward" value={commaSeparators(pendingReward)} />
-            <StatusText title="Deposited" value={commaSeparators(deposited)} />
+            <StatusText title="Pending reward" value={commaSeparators(parseToFloat(pendingReward, kingPrice))} />
+            <StatusText title="Deposited" value={commaSeparators(parseToFloat(deposited, kingPrice))} />
             <StatusText title="Unlock in" value={unlockIn === 'over' ? 'Lock time over' : unlockIn} />
           </KingBalanceText>
         </StakingBalancePanel>
