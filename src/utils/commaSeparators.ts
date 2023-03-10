@@ -4,8 +4,9 @@ export const commaSeparators = (num: number | string) => {
       return numParts.join('.');
 };
 
-export const parseToFloat = (num1: number | string, num2: number) => {
-      const temp = parseFloat(num1.toString()) * num2;
-      const res = temp.toFixed(2);
+export const parseToFloat = (num1: number | string, num2: number | string) => {
+      const temp1 = Number(num1);
+      const temp2 = Number(num2);
+      const res = parseFloat((temp1 * temp2).toFixed(2));
       return res;
 }

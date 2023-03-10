@@ -26,7 +26,7 @@ export const StakingPanel = () => {
   const [isApprove, setApprove] = useState(false);
   const [isFlag, setFlag] = useState(false);
   const [isStakingModalOpen, setStakingModalOpen] = useState(false);
-  const [kingPrice, setKingPrice] = useState(0);
+  const [kingPrice, setKingPrice] = useState('0.00');
 
   const { isConnected, address } = useAccount();
 
@@ -157,7 +157,7 @@ export const StakingPanel = () => {
           </StakingInfo>
           <KingBalanceCircle>
             <KingBalanceTitle>$King Balance</KingBalanceTitle>
-            <KingBalanceValue>{commaSeparators(parseToFloat(kingBalance, kingPrice))}</KingBalanceValue>
+            <KingBalanceValue>{commaSeparators(kingBalance)}</KingBalanceValue>
           </KingBalanceCircle>
           <KingBalanceText>
             <StatusText title="Pending reward" value={commaSeparators(parseToFloat(pendingReward, kingPrice))} />
