@@ -59,15 +59,17 @@ const StakingStatusText = styled.div`
 interface StatusTextProps {
   title: string;
   value: string | number;
+  usdValue?: string | number;
   isFlag?: boolean;
 }
 
 export const StatusText = (props: StatusTextProps) => {
-  const { title, value, isFlag } = props;
+  const { title, value, usdValue, isFlag } = props;
   return (
     <StatusTextContainer>
       <StatusTitle flag={isFlag}>{title}</StatusTitle>
       <StatusValue>{value}</StatusValue>
+      {usdValue && <StatusValue>({usdValue}$)</StatusValue>}
     </StatusTextContainer>
   );
 };
@@ -93,10 +95,11 @@ const StatusTitle = styled.div<StatusTitleProps>`
   font-family: 'gotham-bold';
   line-height: 20px;
   @media screen and (max-width: 840px) {
-    width: ${(props) => (props.flag ?? false ? '48px' : '105px')};
+    width: ${(props) => (props.flag ?? false ? '48px' : '120px')};
   }
   @media screen and (max-width: 450px) {
     font-size: 13px;
+    width: ${(props) => (props.flag ?? false ? '48px' : '105px')};
   }
 `;
 

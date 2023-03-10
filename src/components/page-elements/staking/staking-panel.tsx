@@ -157,11 +157,22 @@ export const StakingPanel = () => {
           </StakingInfo>
           <KingBalanceCircle>
             <KingBalanceTitle>$King Balance</KingBalanceTitle>
-            <KingBalanceValue>{commaSeparators(kingBalance)}</KingBalanceValue>
+            <KingBalanceValue>
+              <p>{commaSeparators(kingBalance)}</p>
+              <p>({parseToFloat(kingBalance, kingPrice)}$)</p>
+            </KingBalanceValue>
           </KingBalanceCircle>
           <KingBalanceText>
-            <StatusText title="Pending reward" value={commaSeparators(parseToFloat(pendingReward, kingPrice))} />
-            <StatusText title="Deposited" value={commaSeparators(parseToFloat(deposited, kingPrice))} />
+            <StatusText
+              title="Pending reward"
+              value={commaSeparators(pendingReward)}
+              usdValue={parseToFloat(pendingReward, kingPrice)}
+            />
+            <StatusText
+              title="Deposited"
+              value={commaSeparators(deposited)}
+              usdValue={parseToFloat(deposited, kingPrice)}
+            />
             <StatusText title="Unlock in" value={unlockIn === 'over' ? 'Lock time over' : unlockIn} />
           </KingBalanceText>
         </StakingBalancePanel>
@@ -323,6 +334,9 @@ const KingBalanceTitle = styled.div`
 const KingBalanceValue = styled.div`
   font-size: 18px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const KingBalanceText = styled.div`
