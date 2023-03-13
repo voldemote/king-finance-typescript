@@ -311,6 +311,7 @@ const KingBalanceCircle = styled.div`
   border-radius: 50%;
   background: #000000 0% 0% no-repeat padding-box;
   border: 4px solid #fed27d;
+  box-shadow: 0px 0px 40px 0px #ffb507;
   display: flex;
   justify-content: center;
   align-items: center;
