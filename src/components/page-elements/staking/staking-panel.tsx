@@ -59,8 +59,8 @@ export const StakingPanel = () => {
     if (isInitialized && address !== undefined) {
       const userData = await getUserData(address);
       if (userData !== undefined) {
-        setDeposited(commaSeparators(userData[0]));
-        setPendingReward(commaSeparators(userData[2]));
+        setDeposited(userData[0]);
+        setPendingReward(userData[2]);
         timeStamp = parseInt(userData[1]);
         if (!isFlag) {
           handleTime();
