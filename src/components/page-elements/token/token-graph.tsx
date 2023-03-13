@@ -1,12 +1,31 @@
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CopyToClipboard from 'src/components/CopyToClipboard';
 import { DeskTopTokenChart, MobileTokenChart } from 'src/components/tokenomics-chart';
 import { TokenChartInfo } from 'src/components/tokenomics-chart/chart-info';
 import { LogoHeader } from 'src/config/images';
+import { useWeb3Store } from 'src/context/Web3Context';
+import { getTotalSellFee } from 'src/contract';
 import styled, { css } from 'styled-components';
+import { useAccount } from 'wagmi';
 
 export const TokenGraphSection = () => {
   const { t } = useTranslation();
+  const { isInitialized } = useWeb3Store();
+  const [buyFee, setBuyFee] = useState(0);
+  const [sellFee, setSellFee] = useState(0);
+
+  const fetchGetTaxes = async () => {
+    const taxes = await getTotalSellFee();
+    setBuyFee(taxes?.buyFee ?? 0);
+    setSellFee(taxes?.sellFee ?? 0);
+    console.log({ taxes });
+  };
+
+  useEffect(() => {
+    fetchGetTaxes();
+  }, [isInitialized]);
+
   return (
     <TokenGraphContainer>
       <TokenDetails>
@@ -40,9 +59,9 @@ export const TokenGraphSection = () => {
         </MediumText>
         <SmallText>
           {/* {t('token.newlisting')} */}
-          <SmallTextLabel>5% Buy</SmallTextLabel>
+          <SmallTextLabel>{buyFee}% Buy</SmallTextLabel>
           <SmallTextLabel> | </SmallTextLabel>
-          <SmallTextLabel>12% SELL</SmallTextLabel>
+          <SmallTextLabel>{sellFee}% SELL</SmallTextLabel>
         </SmallText>
       </TokenDetails>
     </TokenGraphContainer>

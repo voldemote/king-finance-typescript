@@ -69,7 +69,7 @@ export const StatusText = (props: StatusTextProps) => {
     <StatusTextContainer>
       <StatusTitle flag={isFlag}>{title}</StatusTitle>
       <StatusValue>{value}</StatusValue>
-      {usdValue && <StatusValue>({usdValue}$)</StatusValue>}
+      {usdValue && <StatusValue>({usdValue} $)</StatusValue>}
     </StatusTextContainer>
   );
 };

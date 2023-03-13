@@ -13,6 +13,7 @@ let Staking: any = null;
 let StakingWithSigner: any = null;
 let currencyContract: any = null;
 let currencyContractWithSigner: any = null;
+let KingContract: any = null;
 
 const Addy = isTest ? contracts.King.testnet_address : contracts.King.address;
 const stakingAddy = contracts.King.staking;
@@ -22,7 +23,7 @@ export const initializeWeb3 = async (provider_: any, signer_: any) => {
     currencyContractWithSigner = new ethers.Contract(Addy, erc20ABI, signer_);
     StakingWithSigner = new ethers.Contract(stakingAddy, contracts.King.abi, signer_);
     Staking = new ethers.Contract(stakingAddy, contracts.King.abi, provider_);
-
+    KingContract = new ethers.Contract(Addy, contracts.King.abi, provider_);
     provider =  provider_;
     signer =  await signer_;
 };
@@ -125,3 +126,15 @@ const getKingPrice = async () => {
     const res = data.price_usd.toFixed(5);
     return res
 };
+
+export const getTotalSellFee = async () => {
+    if(KingContract !== null && KingContract !== undefined) {
+        console.log("getTotalSellFee :", KingContract)
+        const _sellFee = await KingContract.totalSellFee();
+        const _buyFee = await KingContract.totalBuyFee();
+        const sellFee = parseInt(_sellFee) / 10;
+        const buyFee = parseInt(_buyFee) / 10;
+        console.log({ sellFee, buyFee });
+        return { sellFee, buyFee };
+    }
+}

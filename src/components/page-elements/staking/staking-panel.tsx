@@ -159,7 +159,7 @@ export const StakingPanel = () => {
             <KingBalanceTitle>$King Balance</KingBalanceTitle>
             <KingBalanceValue>
               <p>{commaSeparators(kingBalance)}</p>
-              <p>({parseToFloat(kingBalance, kingPrice)}$)</p>
+              <p>({parseToFloat(kingBalance, kingPrice)} $)</p>
             </KingBalanceValue>
           </KingBalanceCircle>
           <KingBalanceText>
