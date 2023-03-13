@@ -7,6 +7,6 @@ export const commaSeparators = (num: number | string) => {
 export const parseToFloat = (num1: number | string, num2: number | string) => {
       const temp1 = Number(num1);
       const temp2 = Number(num2);
-      const res = (temp1 * temp2).toFixed(2);
+      const res = (temp1 * temp2).toLocaleString();
       return res;
 }
