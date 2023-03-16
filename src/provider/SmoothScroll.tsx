@@ -17,6 +17,8 @@ export const SmoothProvider = ({ children }: SmoothScrollProps) => {
 
   const { t } = useTranslation();
 
+  console.log("In mobile device, I can't be shown.");
+
   // 2.
   const scrollingContainerRef = useRef<HTMLDivElement>(null);
 
