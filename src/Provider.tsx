@@ -28,7 +28,8 @@ export const Provider = ({ children }: ProviderProps) => {
       />
       <StoreProvider>
         <Web3Provider>
-          {isDesktop && <SmoothProvider>{children}</SmoothProvider>} {!isDesktop && <>{children}</>}
+          {/* {isDesktop && <SmoothProvider>{children}</SmoothProvider>} {!isDesktop && <>{children}</>} */}
+          {children}
         </Web3Provider>
       </StoreProvider>
     </ThemeProvider>
